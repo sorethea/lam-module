@@ -44,6 +44,7 @@ class LAMServiceProvider extends ServiceProvider
             UninstallCommand::class,
         ]);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(FilamentServiceProvider::class);
     }
 
     /**

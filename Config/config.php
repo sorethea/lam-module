@@ -1,5 +1,8 @@
 <?php
 
 return [
-    'name' => 'LAM'
+    'name' => 'Laravel Admin Module',
+    'navigation'=>[
+       'name'=>'System',
+    ],
 ];
