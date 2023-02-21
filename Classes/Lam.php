@@ -6,10 +6,10 @@ use Nwidart\Modules\Module;
 
 class Lam
 {
-    private function getModuleNamespace(){
+    public static function getModuleNamespace(){
         return config("modules.namespace","Modules");
     }
-    private function getModuleProviderPath(){
+    public static function getModuleProviderPath(){
         return config("modules.paths.generator.provider.path","Providers");
     }
     public static function getModuleProviderNamespace($moduleName) :string{
@@ -18,6 +18,7 @@ class Lam
     public static function install($name): Module
     {
         $module = \Module::find($name);
+        \Artisan::call("module:migrate-refresh ".$module->getName());
         app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
         $module->json()->set("installed",true)->save();
         return $module;

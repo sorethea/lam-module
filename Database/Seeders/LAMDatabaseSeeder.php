@@ -18,4 +18,8 @@ class LAMDatabaseSeeder extends Seeder
 
         // $this->call("OthersTableSeeder");
     }
+
+    public function rollback(){
+
+    }
 }
