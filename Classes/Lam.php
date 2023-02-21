@@ -47,9 +47,9 @@ class Lam
     {
         $module = \Module::find($name);
         return
-            auth()->user()->can("modules.manager"); //&&
-//            !self::isSystem($module) &&
-//            !self::isInstalled($module);
+            //auth()->user()->can("modules.manager"); //&&
+            !self::isSystem($module) &&
+            !self::isInstalled($module);
     }
     public static function isVisibleForUninstall($name): bool
     {
