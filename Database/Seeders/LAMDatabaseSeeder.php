@@ -16,11 +16,14 @@ class LAMDatabaseSeeder extends Seeder
     {
         Model::unguard();
         $this->call(ModuleTableSeeder::class);
+        $this->call(PermissionTableSeeder::class);
     }
 
     public function rollback(){
         Model::unguard();
         $moduleSeeder = new ModuleTableSeeder();
         $moduleSeeder->rollback();
+        $permissionSeeder = new PermissionTableSeeder();
+        $permissionSeeder->rollback();
     }
 }
