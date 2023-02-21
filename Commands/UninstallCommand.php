@@ -40,8 +40,7 @@ class UninstallCommand extends Command
     public function handle() :int
     {
         if ($name = $this->argument('module') ) {
-            $module = \Module::find($name);
-            $module->json()->set("installed",false)->save();
+            $module = \lam::uninstall($name);
             $this->components->info("Module {$module->getName()} uninstall completed");
             return 1;
         }
