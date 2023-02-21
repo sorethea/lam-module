@@ -46,8 +46,8 @@ class Lam
     public static function isVisibleForInstall($name): bool
     {
         $module = \Module::find($name);
-        return true;
-//            auth()->user()->can("modules.manager") &&
+        return
+            auth()->user()->can("modules.manager"); //&&
 //            !self::isSystem($module) &&
 //            !self::isInstalled($module);
     }
