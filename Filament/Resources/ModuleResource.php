@@ -14,11 +14,14 @@ class ModuleResource extends Resource
 {
     protected static ?string $model = Module::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cube';
+    protected static function getNavigationIcon(): string
+    {
+        return config('lam.models.module.icon');
+    }
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('core.navigation.name');
+        return config('lam.navigation.name');
     }
 
     public static function form(Form $form): Form
