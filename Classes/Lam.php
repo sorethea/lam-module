@@ -31,7 +31,7 @@ class Lam
         return
             auth()->user()->can("modules.manager") &&
             !$module->isEnabled() &&
-            !self::isInstalled($module) &&
+            self::isInstalled($module) &&
             !self::isSystem($module);
     }
     public static function isVisibleForDisable($name) :bool
@@ -47,7 +47,7 @@ class Lam
     {
         $module = \Module::find($name);
         return
-            //auth()->user()->can("modules.manager"); //&&
+            auth()->user()->can("modules.manager"); //&&
             !self::isSystem($module) &&
             !self::isInstalled($module);
     }
