@@ -4,8 +4,9 @@ namespace Modules\LAM\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\LAM\Models\Module;
 
-class LAMDatabaseSeeder extends Seeder
+class ModuleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +16,15 @@ class LAMDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $this->call(ModuleTableSeeder::class);
+        $modules = \Module::all();
+        if(!empty($modules)){
+            foreach ($modules as $module){
+                Module::firstOrCreate(["name"=>$module->getLowerName()]);
+            }
+        }
     }
 
     public function rollback(){
         Model::unguard();
-        $moduleSeeder = new ModuleTableSeeder();
-        $moduleSeeder->rollback();
     }
 }
