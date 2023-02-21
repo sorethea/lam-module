@@ -25,31 +25,31 @@ class Lam
         return
             auth()->user()->can("modules.manager") &&
             !$module->isEnabled() &&
-            !$module->get("type","module")=="system" &&
-            $module->get("installed",false)==false;
+            !$module->json()->get("type","module")=="system" &&
+            $module->json()->get("installed",false)==false;
     }
     public static function isVisibleForDisable($name) :bool
     {
         $module = \Module::find($name);
         return auth()->user()->can("modules.manager")
             && $module->isEnabled()
-            && !$module->get("type","module")=="system"
-            && $module->get("installed",false)==true;
+            && !$module->json()->get("type","module")=="system"
+            && $module->json()->get("installed",false)==true;
     }
     public static function isVisibleForInstall($name): bool
     {
         $module = \Module::find($name);
         return auth()->user()->can("modules.manager")
-            && !$module->get("type","module")=="system"
-            && $module->get("installed",false)==false;
+            && !$module->json()->get("type","module")=="system"
+            && $module->json()->get("installed",false)==false;
     }
     public static function isVisibleForUninstall($name): bool
     {
         $module = \Module::find($name);
         return auth()->user()->can("modules.manager")
-            && !$module->get("type","module")=="system"
+            && !$module->json()->get("type","module")=="system"
             && !$module->isEnabled()
-            && $module->get("installed",false)==true;
+            && $module->json()->get("installed",false)==true;
     }
     public static function install($name): Module
     {
