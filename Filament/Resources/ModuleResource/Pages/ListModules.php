@@ -10,11 +10,11 @@ class ListModules extends ListRecords
 {
     protected static string $resource = ModuleResource::class;
 
-    public function mount(): void
-    {
-        parent::mount();
-        //$this->loadModules();
-    }
+//    public function mount(): void
+//    {
+//        parent::mount();
+//        //$this->loadModules();
+//    }
 
     protected function getActions(): array
     {
