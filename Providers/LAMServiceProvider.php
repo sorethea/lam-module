@@ -4,6 +4,8 @@ namespace Modules\LAM\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\LAM\Commands\InstallCommand;
+use Modules\LAM\Commands\UninstallCommand;
 
 class LAMServiceProvider extends ServiceProvider
 {
@@ -37,6 +39,10 @@ class LAMServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->commands([
+            InstallCommand::class,
+            UninstallCommand::class,
+        ]);
         $this->app->register(RouteServiceProvider::class);
     }
 

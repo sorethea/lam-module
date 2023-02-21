@@ -7,5 +7,6 @@
     "providers": [
         "Modules\\LAM\\Providers\\LAMServiceProvider"
     ],
-    "files": []
+    "files": [],
+    "installed": true
 }
