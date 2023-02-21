@@ -19,37 +19,46 @@ class Lam
     {
         $module->json()->set("installed",$installed)->save();
     }
+    public static function isInstalled($module):bool{
+        return $module->json()->get("installed",false);
+    }
+    public static function isSystem($module):bool{
+        return $module->json()->get("type","module")=="system";
+    }
     public static function isVisibleForEnable($name) :bool
     {
         $module = \Module::find($name);
         return
             auth()->user()->can("modules.manager") &&
             !$module->isEnabled() &&
-            !$module->json()->get("type","module")=="system" &&
-            $module->json()->get("installed",false)==false;
+            !self::isInstalled($module) &&
+            !self::isSystem($module);
     }
     public static function isVisibleForDisable($name) :bool
     {
         $module = \Module::find($name);
-        return auth()->user()->can("modules.manager")
-            && $module->isEnabled()
-            && !$module->json()->get("type","module")=="system"
-            && $module->json()->get("installed",false)==true;
+        return
+            auth()->user()->can("modules.manager") &&
+            $module->isEnabled() &&
+            !self::isSystem($module) &&
+            self::isInstalled($module);
     }
     public static function isVisibleForInstall($name): bool
     {
         $module = \Module::find($name);
-        return auth()->user()->can("modules.manager")
-            && !$module->json()->get("type","module")=="system"
-            && $module->json()->get("installed",false)==false;
+        return
+            auth()->user()->can("modules.manager") &&
+            !self::isSystem($module) &&
+            !self::isInstalled($module);
     }
     public static function isVisibleForUninstall($name): bool
     {
         $module = \Module::find($name);
-        return auth()->user()->can("modules.manager")
-            && !$module->json()->get("type","module")=="system"
-            && !$module->isEnabled()
-            && $module->json()->get("installed",false)==true;
+        return
+            auth()->user()->can("modules.manager") &&
+            !self::isSystem($module) &&
+            !$module->isEnabled() &&
+            self::isInstalled($module);
     }
     public static function install($name): Module
     {
