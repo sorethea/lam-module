@@ -15,13 +15,25 @@ class Lam
     public static function getModuleProviderNamespace($moduleName) :string{
         return self::getModuleNamespace()."\\".$moduleName."\\".self::getModuleProviderPath();
     }
+    public static function setInstalled(Module $module,bool $installed): void
+    {
+        $module->json()->set("installed",$installed)->save();
+    }
     public static function install($name): Module
     {
         $module = \Module::find($name);
         \Artisan::call("module:migrate-refresh ".$module->getName());
         app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
         $module->enable();
-        $module->json()->set("installed",true)->save();
+        self::setInstalled($module,true);
+        return $module;
+    }
+    public static function uninstall($name){
+        $module = \Module::find($name);
+        \Artisan::call("module:migrate-rollback ".$module->getName());
+        app()->register(self::getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
+        $module->disable();
+        self::setInstalled($module,false);
         return $module;
     }
 }

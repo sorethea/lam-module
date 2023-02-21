@@ -6,23 +6,14 @@ use Illuminate\Support\ServiceProvider;
 
 class BaseUninstallServiceProvider extends ServiceProvider
 {
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
+    public function boot()
     {
-        //
+        app()->booted(function () {
+            $this->uninstall();
+        });
     }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
+    public function uninstall(){
+
     }
 }

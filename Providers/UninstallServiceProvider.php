@@ -3,25 +3,13 @@
 namespace Modules\LAM\Providers;
 
 
+use Modules\LAM\Database\Seeders\LAMDatabaseSeeder;
+
 class UninstallServiceProvider extends BaseUninstallServiceProvider
 {
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
+    public function uninstall()
     {
-        //
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
+        $seed = new LAMDatabaseSeeder();
+        $seed->rollback();
     }
 }
