@@ -1,0 +1,11 @@
+{
+    "name": "LAM",
+    "alias": "lam",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\LAM\\Providers\\LAMServiceProvider"
+    ],
+    "files": []
+}
