@@ -5,4 +5,9 @@ return [
     'navigation'=>[
        'name'=>'System',
     ],
+    'models'=>[
+        'Module'=>[
+            'icon'=>'heroicon-o-cube'
+        ]
+    ],
 ];
