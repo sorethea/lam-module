@@ -59,25 +59,19 @@ class ModuleResource extends Resource
                     ->size('lg')
                     ->iconButton()
                     ->visible(fn($record)=>\lam::isVisibleForEnable($record->name)),
-//                Action::make('disable')
-//                    ->requiresConfirmation()
-//                    ->modalHeading(fn($record)=>"Disable {$record->name} Module")
-//                    ->action(function ($record){
-//                        $module = \Module::find($record->name);
-//                        $module->disable();
-//                        redirect(request()->header("Referer"));
-//                    })
-//                    ->icon('heroicon-o-eye-off')
-//                    ->size('lg')
-//                    ->iconButton()
-//                    ->color("warning")
-//                    ->visible(function($record){
-//                        $module = \Module::find($record->name);
-//                        return auth()->user()->can("modules.manager")
-//                            && !\Core::isCore($record->name)
-//                            && $module->isEnabled()
-//                            && $record->installed;
-//                    }),
+                Action::make('disable')
+                    ->requiresConfirmation()
+                    ->modalHeading(fn($record)=>"Disable {$record->name} Module")
+                    ->action(function ($record){
+                        $module = \Module::find($record->name);
+                        $module->disable();
+                        redirect(request()->header("Referer"));
+                    })
+                    ->icon('heroicon-o-eye-off')
+                    ->size('lg')
+                    ->iconButton()
+                    ->color("warning")
+                    ->visible(fn($record)=>\lam::isVisibleForDisable($record->name)),
 //                Action::make('installation')
 //                    ->requiresConfirmation()
 //                    ->modalHeading()

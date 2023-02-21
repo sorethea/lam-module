@@ -35,6 +35,21 @@ class Lam
             && !$module->get("type","module")=="system"
             && $module->get("installed",true);
     }
+    public static function isVisibleForInstall($name): bool
+    {
+        $module = \Module::find($name);
+        return auth()->user()->can("modules.manager")
+            && !$module->get("type","module")=="system"
+            && $module->get("installed",false);
+    }
+    public static function isVisibleForUninstall($name): bool
+    {
+        $module = \Module::find($name);
+        return auth()->user()->can("modules.manager")
+            && !$module->get("type","module")=="system"
+            && !$module->isEnabled()
+            && $module->get("installed",true);
+    }
     public static function install($name): Module
     {
         $module = \Module::find($name);
