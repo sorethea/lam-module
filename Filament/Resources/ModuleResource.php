@@ -79,7 +79,7 @@ class ModuleResource extends Resource
                     ->icon('heroicon-o-download')
                     ->size('lg')
                     ->color('danger')
-                    //->visible(fn($record)=>\lam::isVisibleForInstall($record->name))
+                    ->visible(fn($record)=>\lam::isVisibleForInstall($record->name))
                     ->action(function ($record){
                         \lam::install($record->name);
                         redirect(request()->header("Referer"));
@@ -90,7 +90,7 @@ class ModuleResource extends Resource
                     ->icon('heroicon-o-trash')
                     ->size('lg')
                     ->color('danger')
-                    //->visible(fn($record)=>\lam::isVisibleForUninstall($record->name))
+                    ->visible(fn($record)=>\lam::isVisibleForUninstall($record->name))
                     ->action(function($record){
                         \lam::uninstall($record->name);
                         redirect(request()->header("Referer"));

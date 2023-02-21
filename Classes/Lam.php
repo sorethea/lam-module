@@ -25,7 +25,7 @@ class Lam
         return auth()->user()->can("modules.manager")
             && !$module->isEnabled()
             && !$module->get("type","module")=="system"
-            && $module->get("installed",true);
+            && $module->get("installed",false)==true;
     }
     public static function isVisibleForDisable($name) :bool
     {
@@ -33,14 +33,14 @@ class Lam
         return auth()->user()->can("modules.manager")
             && $module->isEnabled()
             && !$module->get("type","module")=="system"
-            && $module->get("installed",true);
+            && $module->get("installed",false)==true;
     }
     public static function isVisibleForInstall($name): bool
     {
         $module = \Module::find($name);
         return auth()->user()->can("modules.manager")
             && !$module->get("type","module")=="system"
-            && $module->get("installed",false);
+            && $module->get("installed",false)==false;
     }
     public static function isVisibleForUninstall($name): bool
     {
@@ -48,7 +48,7 @@ class Lam
         return auth()->user()->can("modules.manager")
             && !$module->get("type","module")=="system"
             && !$module->isEnabled()
-            && $module->get("installed",true);
+            && $module->get("installed",false)==true;
     }
     public static function install($name): Module
     {
