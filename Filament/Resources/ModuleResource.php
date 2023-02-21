@@ -72,39 +72,30 @@ class ModuleResource extends Resource
                     ->iconButton()
                     ->color("warning")
                     ->visible(fn($record)=>\lam::isVisibleForDisable($record->name)),
-//                Action::make('installation')
-//                    ->requiresConfirmation()
-//                    ->modalHeading()
-//                    ->iconButton()
-//                    ->icon('heroicon-o-download')
-//                    ->size('lg')
-//                    ->color('danger')
-//                    ->visible(function ($record):bool{
-//                        return !\Core::isCore($record->name) && !$record->installed && auth()->user()->can("modules.manager");
-//                    })
-//                    ->action(function ($record){
-//                        $coreModule = new CoreModule($record->name);
-//                        $coreModule->install();
-//                        //$record->installed = true;
-//                        $record->save();
-//                        redirect(request()->header("Referer"));
-//                    }),
-//                Action::make("uninstallation")
-//                    ->modalHeading()
-//                    ->iconButton()
-//                    ->icon('heroicon-o-trash')
-//                    ->size('lg')
-//                    ->color('danger')
-//                    ->visible(function ($record):bool{
-//                        return !\Core::isCore($record->name) && $record->installed && auth()->user()->can("modules.manager");
-//                    })
-//                    ->action(function($record){
-//                        \Core::uninstall($record->name);
-//                        $record->installed = false;
-//                        $record->save();
-//                        redirect(request()->header("Referer"));
-//                    })
-//                    ->requiresConfirmation(),
+                Action::make('installation')
+                    ->requiresConfirmation()
+                    ->modalHeading()
+                    ->iconButton()
+                    ->icon('heroicon-o-download')
+                    ->size('lg')
+                    ->color('danger')
+                    ->visible(fn($record)=>\lam::isVisibleForInstall($record->name))
+                    ->action(function ($record){
+                        \lam::install($record->name);
+                        redirect(request()->header("Referer"));
+                    }),
+                Action::make("uninstallation")
+                    ->modalHeading()
+                    ->iconButton()
+                    ->icon('heroicon-o-trash')
+                    ->size('lg')
+                    ->color('danger')
+                    ->visible(fn($record)=>\lam::isVisibleForUninstall($record->name))
+                    ->action(function($record){
+                        \lam::uninstall($record->name);
+                        redirect(request()->header("Referer"));
+                    })
+                    ->requiresConfirmation(),
 //                DeleteAction::make()
 //                    ->icon(false)
 //                    ->button()
