@@ -96,11 +96,6 @@ class ModuleResource extends Resource
                         redirect(request()->header("Referer"));
                     })
                     ->requiresConfirmation(),
-//                DeleteAction::make()
-//                    ->icon(false)
-//                    ->button()
-//                    ->after(fn($record)=>Artisan::call("module:delete {$record->name}"))
-//                    ->visible(fn($record)=>$record->name != "Core" && auth()->user()->can("modules.manager")),
             ])
             ->bulkActions([
                 //Tables\Actions\DeleteBulkAction::make(),
