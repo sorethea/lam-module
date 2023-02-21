@@ -13,7 +13,7 @@ class ListModules extends ListRecords
     public function mount(): void
     {
         parent::mount();
-        $this->loadModules();
+        //$this->loadModules();
     }
 
     protected function getActions(): array
