@@ -47,7 +47,7 @@ class Lam
     {
         $module = \Module::find($name);
         return
-            auth()->user()->can("modules.manager"); //&&
+            auth()->user()->can("modules.manager") &&
             !self::isSystem($module) &&
             !self::isInstalled($module);
     }
