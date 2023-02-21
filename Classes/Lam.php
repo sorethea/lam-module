@@ -22,7 +22,7 @@ class Lam
     public static function install($name): Module
     {
         $module = \Module::find($name);
-        \Artisan::call("module:migrate ".$module->getName());
+        \Artisan::call("module:migrate-refresh ".$module->getName());
         app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
         $module->enable();
         self::setInstalled($module,true);
