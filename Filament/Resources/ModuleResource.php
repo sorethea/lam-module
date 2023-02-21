@@ -16,7 +16,7 @@ class ModuleResource extends Resource
 
     protected static function getNavigationIcon(): string
     {
-        return config('lam.models.module.icon');
+        return config('lam.models.Module.icon');
     }
 
     protected static function getNavigationGroup(): ?string
