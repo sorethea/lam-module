@@ -1,30 +1,26 @@
 <?php
 
-namespace Modules\Lam\Filament\Resources;
+namespace Modules\LAM\Filament\Resources;
 
-use Modules\Lam\Filament\Resources\ModuleResource\Pages;
-use Modules\Lam\Filament\Resources\ModuleResource\RelationManagers;
-use Modules\Lam\Models\Module;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\Action;
+use Modules\Core\Classes\CoreModule;
+use Modules\Core\Filament\Resources\ModuleResource\Pages;
+use Modules\Core\Filament\Resources\ModuleResource\RelationManagers;
+use Modules\Core\Models\Module;
 
 class ModuleResource extends Resource
 {
     protected static ?string $model = Module::class;
 
-    protected static function getNavigationIcon(): string
-    {
-        return config('lam.models.Module.icon');
-    }
+    protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('lam.navigation.name');
+        return config('core.navigation.name');
     }
 
     public static function form(Form $form): Form
@@ -39,32 +35,114 @@ class ModuleResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make("name")->searchable(),
+                Tables\Columns\TextColumn::make("class")->default(fn($record)=>\Module::find($record->name)->get("class","module")),
+                Tables\Columns\TextColumn::make("requirements")->default(fn($record)=>\Module::find($record->name)->get("requirements",[])),
+                Tables\Columns\TextColumn::make("version")->default(fn($record)=>\Module::find($record->name)->get("version","dev")),
+                Tables\Columns\BooleanColumn::make("enabled")->default(fn($record)=>\Module::find($record->name)->isEnabled()),
+                Tables\Columns\BooleanColumn::make("installed"),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //Tables\Actions\EditAction::make(),
+
+                Action::make('enable')
+                    ->requiresConfirmation()
+                    ->modalHeading(fn($record)=>"Enable {$record->name} Module")
+                    ->action(function ($record){
+                        $module = \Module::find($record->name);
+                        $module->enable();
+                        redirect(request()->header("Referer"));
+                    })
+                    ->color("success")
+                    ->icon('heroicon-o-eye')
+                    ->size('lg')
+                    ->iconButton()
+                    ->visible(function($record){
+                        $module = \Module::find($record->name);
+                        return auth()->user()->can("modules.manager")
+                            && !\Core::isCore($record->name)
+                            && !$module->isEnabled()
+                            && $record->installed;
+                    }),
+                Action::make('disable')
+                    ->requiresConfirmation()
+                    ->modalHeading(fn($record)=>"Disable {$record->name} Module")
+                    ->action(function ($record){
+                        $module = \Module::find($record->name);
+                        $module->disable();
+                        redirect(request()->header("Referer"));
+                    })
+                    ->icon('heroicon-o-eye-off')
+                    ->size('lg')
+                    ->iconButton()
+                    ->color("warning")
+                    ->visible(function($record){
+                        $module = \Module::find($record->name);
+                        return auth()->user()->can("modules.manager")
+                            && !\Core::isCore($record->name)
+                            && $module->isEnabled()
+                            && $record->installed;
+                    }),
+                Action::make('installation')
+                    ->requiresConfirmation()
+                    ->modalHeading()
+                    ->iconButton()
+                    ->icon('heroicon-o-download')
+                    ->size('lg')
+                    ->color('danger')
+                    ->visible(function ($record):bool{
+                        return !\Core::isCore($record->name) && !$record->installed && auth()->user()->can("modules.manager");
+                    })
+                    ->action(function ($record){
+                        $coreModule = new CoreModule($record->name);
+                        $coreModule->install();
+                        //$record->installed = true;
+                        $record->save();
+                        redirect(request()->header("Referer"));
+                    }),
+                Action::make("uninstallation")
+                    ->modalHeading()
+                    ->iconButton()
+                    ->icon('heroicon-o-trash')
+                    ->size('lg')
+                    ->color('danger')
+                    ->visible(function ($record):bool{
+                        return !\Core::isCore($record->name) && $record->installed && auth()->user()->can("modules.manager");
+                    })
+                    ->action(function($record){
+                        \Core::uninstall($record->name);
+                        $record->installed = false;
+                        $record->save();
+                        redirect(request()->header("Referer"));
+                    })
+                    ->requiresConfirmation(),
+//                DeleteAction::make()
+//                    ->icon(false)
+//                    ->button()
+//                    ->after(fn($record)=>Artisan::call("module:delete {$record->name}"))
+//                    ->visible(fn($record)=>$record->name != "Core" && auth()->user()->can("modules.manager")),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListModules::route('/'),
-            'create' => Pages\CreateModule::route('/create'),
-            'edit' => Pages\EditModule::route('/{record}/edit'),
+            'index' => \Modules\LAM\Filament\Resources\ModuleResource\Pages\ListModules::route('/'),
+            //'create' => Pages\CreateModule::route('/create'),
+            //'edit' => Pages\EditModule::route('/{record}/edit'),
         ];
-    }    
+    }
 }

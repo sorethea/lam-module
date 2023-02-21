@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Lam\Filament\Resources\ModuleResource\Pages;
+namespace Modules\LAM\Filament\Resources\ModuleResource\Pages;
 
-use Modules\Lam\Filament\Resources\ModuleResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Modules\LAM\Filament\Resources\ModuleResource;
 
 class EditModule extends EditRecord
 {

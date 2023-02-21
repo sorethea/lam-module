@@ -1,10 +1,9 @@
 <?php
 
-namespace Modules\Lam\Filament\Resources\ModuleResource\Pages;
+namespace Modules\LAM\Filament\Resources\ModuleResource\Pages;
 
-use Modules\Lam\Filament\Resources\ModuleResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
+use Modules\LAM\Filament\Resources\ModuleResource;
 
 class CreateModule extends CreateRecord
 {
