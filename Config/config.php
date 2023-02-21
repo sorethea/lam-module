@@ -4,6 +4,7 @@ return [
     'name' => 'Laravel Admin Module',
     'navigation'=>[
        'name'=>'System',
+        'enabled'=>true,
     ],
     'models'=>[
         'Module'=>[
