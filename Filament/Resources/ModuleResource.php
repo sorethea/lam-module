@@ -46,25 +46,19 @@ class ModuleResource extends Resource
             ->actions([
                 //Tables\Actions\EditAction::make(),
 
-//                Action::make('enable')
-//                    ->requiresConfirmation()
-//                    ->modalHeading(fn($record)=>"Enable {$record->name} Module")
-//                    ->action(function ($record){
-//                        $module = \Module::find($record->name);
-//                        $module->enable();
-//                        redirect(request()->header("Referer"));
-//                    })
-//                    ->color("success")
-//                    ->icon('heroicon-o-eye')
-//                    ->size('lg')
-//                    ->iconButton()
-//                    ->visible(function($record){
-//                        $module = \Module::find($record->name);
-//                        return auth()->user()->can("modules.manager")
-//                            && !\Core::isCore($record->name)
-//                            && !$module->isEnabled()
-//                            && $record->installed;
-//                    }),
+                Action::make('enable')
+                    ->requiresConfirmation()
+                    ->modalHeading(fn($record)=>"Enable {$record->name} Module")
+                    ->action(function ($record){
+                        $module = \Module::find($record->name);
+                        $module->enable();
+                        redirect(request()->header("Referer"));
+                    })
+                    ->color("success")
+                    ->icon('heroicon-o-eye')
+                    ->size('lg')
+                    ->iconButton()
+                    ->visible(fn($record)=>\lam::isVisibleForEnable($record->name)),
 //                Action::make('disable')
 //                    ->requiresConfirmation()
 //                    ->modalHeading(fn($record)=>"Disable {$record->name} Module")

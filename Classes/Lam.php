@@ -19,6 +19,20 @@ class Lam
     {
         $module->json()->set("installed",$installed)->save();
     }
+    public static function isVisibleForEnable($name) :bool
+    {
+        $module = \Module::find($name);
+        return auth()->user()->can("modules.manager")
+            && !$module->isEnabled()
+            && $module->get("installed",true);
+    }
+    public static function isVisibleForDisable($name) :bool
+    {
+        $module = \Module::find($name);
+        return auth()->user()->can("modules.manager")
+            && $module->isEnabled()
+            && $module->get("installed",true);
+    }
     public static function install($name): Module
     {
         $module = \Module::find($name);
