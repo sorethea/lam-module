@@ -22,10 +22,11 @@ class Lam
     public static function isVisibleForEnable($name) :bool
     {
         $module = \Module::find($name);
-        return auth()->user()->can("modules.manager")
-            && !$module->isEnabled()
-            && !$module->get("type","module")=="system"
-            && $module->get("installed",false)==true;
+        return
+            //auth()->user()->can("modules.manager") &&
+            !$module->isEnabled() &&
+            !$module->get("type","module")=="system" &&
+            $module->get("installed",false)==true;
     }
     public static function isVisibleForDisable($name) :bool
     {
