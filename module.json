@@ -2,6 +2,7 @@
     "name": "LAM",
     "alias": "lam",
     "description": "",
+    "type": "system",
     "keywords": [],
     "priority": 0,
     "providers": [
