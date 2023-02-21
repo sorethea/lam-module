@@ -20,6 +20,7 @@ class Lam
         $module = \Module::find($name);
         \Artisan::call("module:migrate-refresh ".$module->getName());
         app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
+        $module->enable();
         $module->json()->set("installed",true)->save();
         return $module;
     }
