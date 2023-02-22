@@ -2,10 +2,20 @@
 
 namespace Modules\LAM\Classes;
 
+use Illuminate\Container\Container;
+use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Models\Module;
 
 class Lam
 {
+    private $app;
+    private $installer;
+    public function __construct(Container $app)
+    {
+        $this->app = $app;
+        $this->installer = $this->app[InstallerInterface::class];
+    }
+
     public static function getModuleNamespace(){
         return config("modules.namespace","Modules");
     }
