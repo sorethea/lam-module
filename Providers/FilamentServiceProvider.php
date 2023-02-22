@@ -5,7 +5,13 @@ namespace Modules\LAM\Providers;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationGroup;
 use Filament\PluginServiceProvider;
+use Modules\LAM\Filament\Resources\AddressResource;
+use Modules\LAM\Filament\Resources\CommentResource;
 use Modules\Lam\Filament\Resources\ModuleResource;
+use Modules\LAM\Filament\Resources\PhoneResource;
+use Modules\LAM\Filament\Resources\PriceResource;
+use Modules\LAM\Filament\Resources\RatingResource;
+use Modules\LAM\Filament\Resources\TagResource;
 use Spatie\LaravelPackageTools\Package;
 
 class FilamentServiceProvider extends PluginServiceProvider
@@ -17,6 +23,12 @@ class FilamentServiceProvider extends PluginServiceProvider
     protected array $pages = [];
     protected array $resources =[
         ModuleResource::class,
+        AddressResource::class,
+        CommentResource::class,
+        PhoneResource::class,
+        PriceResource::class,
+        RatingResource::class,
+        TagResource::class,
     ];
     public function configurePackage(Package $package): void
     {

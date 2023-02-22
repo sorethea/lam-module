@@ -26,6 +26,12 @@ class PermissionTableSeeder extends Seeder
             "permissions",
             "modules",
             "activities",
+            "addresses",
+            "comments",
+            "phones",
+            "prices",
+            "ratings",
+            "tags",
         ];
         foreach ($models as $model){
             $levels = [
