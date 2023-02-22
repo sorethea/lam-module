@@ -106,7 +106,7 @@ class LAMServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return [InstallerInterface::class,"lam"];
     }
 
     private function getPublishableViewPaths(): array
