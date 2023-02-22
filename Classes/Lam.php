@@ -15,7 +15,7 @@ class Lam
     public static function getModuleProviderNamespace($moduleName) :string{
         return self::getModuleNamespace()."\\".$moduleName."\\".self::getModuleProviderPath();
     }
-    public static function setInstalled(Module $module,bool $installed): void
+    public static function setInstalled($module,bool $installed): void
     {
         $module->json()->set("installed",$installed)->save();
     }
