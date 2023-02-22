@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\LAM\Commands\InstallCommand;
 use Modules\LAM\Commands\UninstallCommand;
+use Modules\LAM\Contracts\InstallerInterface;
 
 class LAMServiceProvider extends ServiceProvider
 {
@@ -105,7 +106,7 @@ class LAMServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return ['lam'];
     }
 
     private function getPublishableViewPaths(): array

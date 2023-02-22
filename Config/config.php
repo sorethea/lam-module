@@ -2,6 +2,21 @@
 
 return [
     'name' => 'Laravel Admin Module',
+    'cache' => [
+        'enabled' => false,
+        'driver' => 'file',
+        'key' => 'lam-modules',
+        'lifetime' => 60,
+    ],
+    'installer'=>[
+        'file'=>[
+            'path' => base_path('installed_modules.json'),
+            'class' => \Modules\LAM\Installer\FileInstaller::class,
+            'cache-key' => 'installer-file',
+            'cache-lifetime' => 604800,
+        ]
+    ],
+
     'system-navigation'=>[
        'name'=>'System',
         'enabled'=>true,

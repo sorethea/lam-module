@@ -4,7 +4,7 @@ namespace Modules\LAM\Classes;
 
 use Modules\LAM\Models\Module;
 
-abstract class Lam
+class BaseLam
 {
     public static function getModuleNamespace(){
         return config("modules.namespace","Modules");
