@@ -53,6 +53,11 @@ class FilamentServiceProvider extends PluginServiceProvider
                 NavigationGroup::make()
                     ->label(config('lam.navigation.name'))
             ]);
+            if(config('lam.system-navigation.enabled'))
+                Filament::registerNavigationGroups([
+                    NavigationGroup::make()
+                        ->label(config('lam.system-navigation.name'))
+                ]);
         });
         return parent::boot();
     }

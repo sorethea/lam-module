@@ -21,7 +21,7 @@ class ModuleResource extends Resource
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('lam.navigation.name','System');
+        return config('lam.system-navigation.name','System');
     }
 
     public static function form(Form $form): Form
