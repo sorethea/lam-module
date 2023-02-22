@@ -80,7 +80,7 @@ class Lam
 
     public static function scan(): void
     {
-        Module::all()->delete();
+        Module::truncate();
         $modules = \Module::all();
         if(!empty($modules)){
             foreach ($modules as $module){
