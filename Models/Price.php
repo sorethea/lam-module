@@ -4,7 +4,7 @@ namespace Modules\LAM\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Utility\Traits\HasTag;
+use Modules\LAM\Traits\HasTag;
 
 class Price extends Model
 {
