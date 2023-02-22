@@ -77,4 +77,14 @@ class Lam
         self::setInstalled($module,false);
         return $module;
     }
+
+    public static function scan(): void
+    {
+        $modules = \Module::all();
+        foreach ($modules as $module){
+            Module::firstOrCreate([
+                "name"=>$module->getName(),
+            ]);
+        }
+    }
 }
