@@ -14,7 +14,7 @@ class ListModules extends ListRecords
     protected function getActions(): array
     {
         return [
-            Action::make('scan')
+            Action::make('scan_modules')
                 ->button()
                 ->icon('heroicon-o-search')
                 ->action(function (){
