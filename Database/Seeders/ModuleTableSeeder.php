@@ -16,12 +16,7 @@ class ModuleTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $modules = \Module::all();
-        if(!empty($modules)){
-            foreach ($modules as $module){
-                Module::firstOrCreate(["name"=>$module->getLowerName()]);
-            }
-        }
+        \lam::scan();
     }
 
     public function rollback(){

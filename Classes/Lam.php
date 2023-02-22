@@ -81,10 +81,10 @@ class Lam
     public static function scan(): void
     {
         $modules = \Module::all();
-        foreach ($modules as $module){
-            Module::firstOrCreate([
-                "name"=>$module->getName(),
-            ]);
+        if(!empty($modules)){
+            foreach ($modules as $module){
+                Module::firstOrCreate(["name"=>$module->getLowerName()]);
+            }
         }
     }
 }
