@@ -21,7 +21,7 @@ class ActivityResource extends Resource
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('lam.navigation.name');
+        return config('lam.system-navigation.name');
     }
 
     public static function form(Form $form): Form
