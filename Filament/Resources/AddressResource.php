@@ -16,12 +16,12 @@ class AddressResource extends Resource
 
     protected static function getNavigationIcon(): string
     {
-        return config('utility.models.Address.icon');
+        return config('lam.models.Address.icon');
     }
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('utility.navigation.name');
+        return config('lam.navigation.name');
     }
 
     public static function form(Form $form): Form

@@ -16,7 +16,7 @@ class RatingResource extends Resource
 
     protected static function getNavigationIcon(): string
     {
-        return config('utility.models.Rating.icon');
+        return config('lam.models.Rating.icon');
     }
 
     protected static function getNavigationGroup(): ?string

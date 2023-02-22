@@ -17,7 +17,7 @@ class TagResource extends Resource
 
     protected static function getNavigationIcon(): string
     {
-        return config('utility.models.Tag.icon');
+        return config('lam.models.Tag.icon');
     }
 
     protected static function getNavigationGroup(): ?string

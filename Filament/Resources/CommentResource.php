@@ -18,12 +18,12 @@ class CommentResource extends Resource
 
     protected static function getNavigationIcon(): string
     {
-        return config('utility.models.Comment.icon');
+        return config('lam.models.Comment.icon');
     }
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('utility.navigation.name');
+        return config('lam.navigation.name');
     }
 
     public static function form(Form $form): Form

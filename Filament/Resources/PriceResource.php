@@ -18,12 +18,12 @@ class PriceResource extends Resource
 
     protected static function getNavigationIcon(): string
     {
-        return config('utility.models.Price.icon');
+        return config('lam.models.Price.icon');
     }
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('utility.navigation.name');
+        return config('lam.navigation.name');
     }
 
     public static function form(Form $form): Form

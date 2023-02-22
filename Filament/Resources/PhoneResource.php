@@ -16,7 +16,7 @@ class PhoneResource extends Resource
 
     protected static function getNavigationIcon(): string
     {
-        return config('utility.models.Phone.icon');
+        return config('lam.models.Phone.icon');
     }
 
     protected static function getNavigationGroup(): ?string
