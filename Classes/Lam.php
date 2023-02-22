@@ -60,7 +60,7 @@ class Lam
             !$module->isEnabled() &&
             self::isInstalled($module);
     }
-    public static function install($name): Module
+    public static function install($name)
     {
         $module = \Module::find($name);
         \Artisan::call("module:migrate-refresh ".$module->getName());
