@@ -6,7 +6,7 @@ use Illuminate\Container\Container;
 use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Models\Module;
 
-class Lam
+abstract class Lam
 {
     private $app;
     private $installer;
