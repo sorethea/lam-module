@@ -2,7 +2,7 @@
 
 namespace Modules\LAM\Classes;
 
-use Nwidart\Modules\Module;
+use Modules\LAM\Models\Module;
 
 class Lam
 {

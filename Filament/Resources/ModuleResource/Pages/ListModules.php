@@ -16,6 +16,7 @@ class ListModules extends ListRecords
         return [
             Action::make('scan')
                 ->button()
+                ->icon('heroicon-o-search')
                 ->action(function (){
                     \lam::scan();
                     redirect(request()->header("Referer"));
