@@ -62,20 +62,33 @@ class Lam
     }
     public static function install($name)
     {
-        $module = \Module::find($name);
-        \Artisan::call("module:migrate-refresh ".$module->getName());
-        app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
-        $module->enable();
-        self::setInstalled($module,true);
-        return $module;
+        try {
+            \DB::beginTransaction();
+            $module = \Module::find($name);
+            \Artisan::call("module:migrate-refresh ".$module->getName());
+            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
+            $module->enable();
+            self::setInstalled($module,true);
+            \DB::commit();
+        }catch (\Throwable $exception){
+            \DB::rollBack();
+        }
+
+
     }
     public static function uninstall($name){
-        $module = \Module::find($name);
-        \Artisan::call("module:migrate-rollback ".$module->getName());
-        app()->register(self::getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
-        $module->disable();
-        self::setInstalled($module,false);
-        return $module;
+        try {
+            \DB::beginTransaction();
+            $module = \Module::find($name);
+            \Artisan::call("module:migrate-rollback ".$module->getName());
+            app()->register(self::getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
+            $module->disable();
+            self::setInstalled($module,false);
+            \DB::commit();
+        }catch (\Throwable $exception){
+            \DB::rollBack();
+        }
+
     }
 
     public static function scan(): void
