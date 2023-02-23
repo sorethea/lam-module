@@ -16,10 +16,19 @@ class LamModule extends \Nwidart\Modules\Laravel\Module
         parent::__construct($app, $name, $path);
         $this->installer = $app[InstallerInterface::class];
     }
-    public function installModule(){
+    public function install(){
         $this->installer->install($this);
     }
-    public function uninstallModule(){
+    public function uninstall(){
         $this->installer->uninstall($this);
+    }
+
+    public function isInstalled(): bool
+    {
+        return $this->installer->hasInstalled($this);
+    }
+    public function isSystem(): bool
+    {
+        return $this->json()->get('type')==="system";
     }
 }
