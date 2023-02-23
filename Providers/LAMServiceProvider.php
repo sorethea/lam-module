@@ -47,6 +47,7 @@ class LAMServiceProvider extends ServiceProvider
         ]);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(FilamentServiceProvider::class);
+        $this->app->alias(Lam::class,"lams");
     }
 
     /**
