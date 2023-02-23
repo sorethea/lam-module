@@ -53,7 +53,7 @@ class LAMServiceProvider extends ServiceProvider
     protected function registerServices(){
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(FilamentServiceProvider::class);
-        $this->app->singleton(LamRepositoryInterface::class, function ($app) {
+        $this->app->singleton(RepositoryInterface::class, function ($app) {
             $path = $app['config']->get('modules.paths.modules');
             return new Lam($app, $path);
         });
