@@ -75,15 +75,11 @@ class Lam extends FileRepository
     {
         try {
             \DB::beginTransaction();
-
-            if(!is_null($name)){
-                $this->name = $name;
-            }
-            //$module = \Module::find($name);
-            \Artisan::call("module:migrate-refresh ".$this->getName());
-            app()->register(self::getModuleProviderNamespace($this->getName())."\\InstallServiceProvider");
-            $this->enable();
-            self::setInstalled($this,true);
+            $module = \Module::find($name);
+            \Artisan::call("module:migrate-refresh ".$module->getName());
+            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
+            $module->enable();
+            self::setInstalled($module,true);
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
@@ -91,17 +87,14 @@ class Lam extends FileRepository
 
 
     }
-    public function uninstallModule($name=null){
+    public static function uninstallModule($name=null){
         try {
             \DB::beginTransaction();
-            //$module = \Module::find($name);
-            if(!is_null($name)){
-                $this->name = $name;
-            }
-            \Artisan::call("module:migrate-rollback ".$this->getName());
-            app()->register(self::getModuleProviderNamespace($this->getName())."\\UninstallServiceProvider");
-            $this->disable();
-            self::setInstalled($this,false);
+            $module = \Module::find($name);
+            \Artisan::call("module:migrate-rollback ".$module->getName());
+            app()->register(self::getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
+            $module->disable();
+            self::setInstalled($module,false);
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
