@@ -14,7 +14,7 @@
                 "Modules\\LAM\\Providers\\LAMServiceProvider"
             ],
             "aliases": {
-                "lam": "Modules\\LAM\\Facades\\Lam"
+                "Lam": "Modules\\LAM\\Facades\\Lam"
             }
         }
     },

@@ -61,7 +61,7 @@ class ModuleResource extends Resource
                     ->icon('heroicon-o-eye')
                     ->size('lg')
                     ->iconButton()
-                    ->visible(fn($record)=>\lam::isVisibleForEnable($record->name)),
+                    ->visible(fn($record)=>\Lam::isVisibleForEnable($record->name)),
                 Action::make('disable')
                     ->requiresConfirmation()
                     ->modalHeading(fn($record)=>"Disable {$record->name} Module")
@@ -74,7 +74,7 @@ class ModuleResource extends Resource
                     ->size('lg')
                     ->iconButton()
                     ->color("warning")
-                    ->visible(fn($record)=>\lam::isVisibleForDisable($record->name)),
+                    ->visible(fn($record)=>\Lam::isVisibleForDisable($record->name)),
                 Action::make('installation')
                     ->requiresConfirmation()
                     ->modalHeading()
@@ -82,9 +82,9 @@ class ModuleResource extends Resource
                     ->icon('heroicon-o-download')
                     ->size('lg')
                     ->color('danger')
-                    ->visible(fn($record)=>\lam::isVisibleForInstall($record->name))
+                    ->visible(fn($record)=>\Lam::isVisibleForInstall($record->name))
                     ->action(function ($record){
-                        \lam::install($record->name);
+                        \Lam::install($record->name);
                         redirect(request()->header("Referer"));
                     }),
                 Action::make("uninstallation")
@@ -93,9 +93,9 @@ class ModuleResource extends Resource
                     ->icon('heroicon-o-trash')
                     ->size('lg')
                     ->color('danger')
-                    ->visible(fn($record)=>\lam::isVisibleForUninstall($record->name))
+                    ->visible(fn($record)=>\Lam::isVisibleForUninstall($record->name))
                     ->action(function($record){
-                        \lam::uninstall($record->name);
+                        \Lam::uninstall($record->name);
                         redirect(request()->header("Referer"));
                     })
                     ->requiresConfirmation(),

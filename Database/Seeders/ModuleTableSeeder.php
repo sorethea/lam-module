@@ -16,7 +16,7 @@ class ModuleTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        \lam::scan();
+        \Lam::scan();
     }
 
     public function rollback(){
