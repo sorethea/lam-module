@@ -4,6 +4,7 @@ namespace Modules\LAM\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\LAM\Classes\Lam;
 use Modules\LAM\Commands\InstallCommand;
 use Modules\LAM\Commands\UninstallCommand;
 use Modules\LAM\Contracts\InstallerInterface;
@@ -106,7 +107,7 @@ class LAMServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [InstallerInterface::class,"lam"];
+        return [Lam::class,"lam"];
     }
 
     private function getPublishableViewPaths(): array
