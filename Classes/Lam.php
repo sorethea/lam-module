@@ -17,26 +17,26 @@ class Lam extends FileRepository
 //        //$this->installer = $this->app[InstallerInterface::class];
 //    }
 
-    public static function getModuleNamespace(){
+    public function getModuleNamespace(){
         return config("modules.namespace","Modules");
     }
-    public static function getModuleProviderPath(){
+    public function getModuleProviderPath(){
         return config("modules.paths.generator.provider.path","Providers");
     }
-    public static function getModuleProviderNamespace($moduleName) :string{
+    public function getModuleProviderNamespace($moduleName) :string{
         return self::getModuleNamespace()."\\".$moduleName."\\".self::getModuleProviderPath();
     }
-    public static function setInstalled($module,bool $installed): void
+    public function setInstalled($module,bool $installed): void
     {
         $module->json()->set("installed",$installed)->save();
     }
-    public static function isInstalled($module):bool{
+    public function isInstalled($module):bool{
         return $module->json()->get("installed",false);
     }
     public static function isSystem($module):bool{
         return $module->json()->get("type","module")=="system";
     }
-    public static function isVisibleForEnable($name) :bool
+    public function isVisibleForEnable($name) :bool
     {
         $module = \Module::find($name);
         return
@@ -45,7 +45,7 @@ class Lam extends FileRepository
             self::isInstalled($module) &&
             !self::isSystem($module);
     }
-    public static function isVisibleForDisable($name) :bool
+    public function isVisibleForDisable($name) :bool
     {
         $module = \Module::find($name);
         return
@@ -54,7 +54,7 @@ class Lam extends FileRepository
             !self::isSystem($module) &&
             self::isInstalled($module);
     }
-    public static function isVisibleForInstall($name): bool
+    public function isVisibleForInstall($name): bool
     {
         $module = \Module::find($name);
         return
@@ -62,7 +62,7 @@ class Lam extends FileRepository
             !self::isSystem($module) &&
             !self::isInstalled($module);
     }
-    public static function isVisibleForUninstall($name): bool
+    public function isVisibleForUninstall($name): bool
     {
         $module = \Module::find($name);
         return
@@ -71,24 +71,27 @@ class Lam extends FileRepository
             !$module->isEnabled() &&
             self::isInstalled($module);
     }
-    public static function installModule($name)
+    public function installModule($name=null)
     {
         try {
             \DB::beginTransaction();
-            $module = \Module::find($name);
-            \Artisan::call("module:migrate-refresh ".$module->getName());
-            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
-            $module->enable();
-            self::setInstalled($module,true);
+
+            if(!is_null($name)){
+                $this->name = $name;
+            }
+            //$module = \Module::find($name);
+            \Artisan::call("module:migrate-refresh ".$this->getName());
+            app()->register(self::getModuleProviderNamespace($this->getName())."\\InstallServiceProvider");
+            $this->enable();
+            self::setInstalled($this,true);
             \DB::commit();
-            return $module;
         }catch (\Throwable $exception){
             \DB::rollBack();
         }
 
 
     }
-    public static function uninstallModule($name){
+    public static function uninstallModule($name=null){
         try {
             \DB::beginTransaction();
             $module = \Module::find($name);
@@ -97,7 +100,6 @@ class Lam extends FileRepository
             $module->disable();
             self::setInstalled($module,false);
             \DB::commit();
-            return $module;
         }catch (\Throwable $exception){
             \DB::rollBack();
         }

@@ -3,6 +3,7 @@
 namespace Modules\LAM\Commands;
 
 use Illuminate\Console\Command;
+use Modules\LAM\Classes\Lam;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -40,7 +41,8 @@ class InstallCommand extends Command
     public function handle() :int
     {
         if ($name = $this->argument('module') ) {
-            $module = \Lam::installModule($name);
+            $module = \Lam::find($name)->installModule();
+            //\Lam::installModule($module->getName());
             $this->components->info("Module {$module->getName()} install completed");
             return 1;
         }
