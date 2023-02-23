@@ -71,7 +71,7 @@ class Lam extends FileRepository
             !$module->isEnabled() &&
             self::isInstalled($module);
     }
-    public function installModule($name=null)
+    public function installModule($name)
     {
         try {
             \DB::beginTransaction();
@@ -87,7 +87,7 @@ class Lam extends FileRepository
 
 
     }
-    public static function uninstallModule($name=null){
+    public static function uninstallModule($name){
         try {
             \DB::beginTransaction();
             $module = \Module::find($name);
