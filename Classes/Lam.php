@@ -28,8 +28,9 @@ class Lam extends FileRepository
     }
     public function setInstalled($module,bool $installed): void
     {
+        dd($module->getName());
         $module->json()->set("installed",$installed)->save();
-        dd($module->json()->get("installed"));
+
     }
     public function isInstalled($module):bool{
         return $module->json()->get("installed",false);
