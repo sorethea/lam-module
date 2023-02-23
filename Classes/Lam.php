@@ -115,6 +115,6 @@ class Lam extends FileRepository
 
     protected function createModule(...$args)
     {
-        return new \Nwidart\Modules\Laravel\Module(...$args);
+        return new LamModule(...$args);
     }
 }
