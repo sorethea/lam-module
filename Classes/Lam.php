@@ -24,7 +24,7 @@ class Lam extends FileRepository
         return config("modules.paths.generator.provider.path","Providers");
     }
     public function getModuleProviderNamespace($moduleName) :string{
-        return self::getModuleNamespace()."\\".$moduleName."\\".self::getModuleProviderPath();
+        return $this->getModuleNamespace()."\\".$moduleName."\\".$this->getModuleProviderPath();
     }
     public function setInstalled($module,bool $installed): void
     {
@@ -42,8 +42,8 @@ class Lam extends FileRepository
         return
             auth()->user()->can("modules.manager") &&
             !$module->isEnabled() &&
-            self::isInstalled($module) &&
-            !self::isSystem($module);
+            $this->isInstalled($module) &&
+            !$this->isSystem($module);
     }
     public function isVisibleForDisable($name) :bool
     {
@@ -51,25 +51,25 @@ class Lam extends FileRepository
         return
             auth()->user()->can("modules.manager") &&
             $module->isEnabled() &&
-            !self::isSystem($module) &&
-            self::isInstalled($module);
+            !$this->isSystem($module) &&
+            $this->isInstalled($module);
     }
     public function isVisibleForInstall($name): bool
     {
         $module = \Module::find($name);
         return
             auth()->user()->can("modules.manager") &&
-            !self::isSystem($module) &&
-            !self::isInstalled($module);
+            !$this->isSystem($module) &&
+            !$this->isInstalled($module);
     }
     public function isVisibleForUninstall($name): bool
     {
         $module = \Module::find($name);
         return
             auth()->user()->can("modules.manager") &&
-            !self::isSystem($module) &&
+            !$this->isSystem($module) &&
             !$module->isEnabled() &&
-            self::isInstalled($module);
+            $this->isInstalled($module);
     }
     public function installModule($name)
     {
@@ -77,9 +77,9 @@ class Lam extends FileRepository
             \DB::beginTransaction();
             $module = \Lam::find($name);
             \Artisan::call("module:migrate-refresh ".$module->getName());
-            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
+            app()->register($this->getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
             $module->enable();
-            self::setInstalled($module,true);
+            $this->setInstalled($module,true);
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
@@ -92,9 +92,9 @@ class Lam extends FileRepository
             \DB::beginTransaction();
             $module = \Lam::find($name);
             \Artisan::call("module:migrate-rollback ".$module->getName());
-            app()->register(self::getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
+            app()->register($this->getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
             $module->disable();
-            self::setInstalled($module,false);
+            $this->setInstalled($module,false);
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
