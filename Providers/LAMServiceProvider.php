@@ -9,6 +9,7 @@ use Modules\LAM\Commands\InstallCommand;
 use Modules\LAM\Commands\UninstallCommand;
 use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Contracts\LamRepositoryInterface;
+use Modules\LAM\Installer\FileInstaller;
 use Nwidart\Modules\Contracts\RepositoryInterface;
 
 class LAMServiceProvider extends ServiceProvider
@@ -48,6 +49,7 @@ class LAMServiceProvider extends ServiceProvider
             UninstallCommand::class,
         ]);
         $this->registerServices();
+        $this->app->bind(InstallerInterface::class, FileInstaller::class);
     }
 
     protected function registerServices(){
