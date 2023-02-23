@@ -76,6 +76,7 @@ class Lam extends FileRepository
             $module->enable();
             $module->installModule();
             $this->setInstalled($module,true);
+            $this->scanModules();
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
@@ -92,6 +93,7 @@ class Lam extends FileRepository
             $module->disable();
             $module->uninstallModule();
             $this->setInstalled($module,false);
+            $this->scanModules();
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
