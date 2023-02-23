@@ -105,7 +105,7 @@ class Lam extends FileRepository
     public static function scanModules(): void
     {
         Module::truncate();
-        $modules = \Module::all();
+        $modules = \Lam::all();
         if(!empty($modules)){
             foreach ($modules as $module){
                 Module::firstOrCreate(["name"=>$module->getLowerName()]);
