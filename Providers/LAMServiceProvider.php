@@ -57,7 +57,7 @@ class LAMServiceProvider extends ServiceProvider
             $path = $app['config']->get('modules.paths.modules');
             return new Lam($app, $path);
         });
-        $this->app->alias(LamRepositoryInterface::class,"lams");
+        $this->app->alias(RepositoryInterface::class,"lams");
     }
 
     /**
