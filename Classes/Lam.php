@@ -75,8 +75,8 @@ class Lam extends FileRepository
             app()->register($this->getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
             $module->enable();
             $this->setInstalled($module,true);
-            dd($module->getName());
             \DB::commit();
+            return $module;
         }catch (\Throwable $exception){
             \DB::rollBack();
         }
