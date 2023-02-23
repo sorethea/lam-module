@@ -25,7 +25,11 @@ class LamModule extends \Nwidart\Modules\Laravel\Module
 
     public function isInstalled(): bool
     {
-        return $this->installer->hasInstalled($this);
+        return $this->installer->hasInstalled($this,true);
+    }
+    public function isUninstalled(): bool
+    {
+        return $this->installer->hasInstalled($this,false);
     }
     public function isSystem(): bool
     {
