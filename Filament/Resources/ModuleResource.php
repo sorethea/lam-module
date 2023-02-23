@@ -93,7 +93,8 @@ class ModuleResource extends Resource
                     ->icon('heroicon-o-trash')
                     ->size('lg')
                     ->color('danger')
-                    ->visible(fn($record)=>\Lam::isVisibleForUninstall($record->name))
+                    ->visible(fn($record)=>\Lam::isVisibleForUninstall($record->name) &&
+                        auth()->user()->can("modules.manager"))
                     ->action(function($record){
                         \Lam::uninstallModule($record->name);
                         redirect(request()->header("Referer"));
