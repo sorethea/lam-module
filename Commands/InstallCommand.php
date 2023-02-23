@@ -41,9 +41,8 @@ class InstallCommand extends Command
     public function handle() :int
     {
         if ($name = $this->argument('module') ) {
-            $module = \Lam::find($name);
             \Lam::installModule($name);
-            $this->components->info("Module {$module->getName()} install completed");
+            $this->components->info("Module {$name} install completed");
             return 1;
         }
         return 0;
