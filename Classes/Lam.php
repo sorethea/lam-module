@@ -13,7 +13,7 @@ class Lam
     public function __construct(Container $app)
     {
         $this->app = $app;
-        $this->installer = $this->app[InstallerInterface::class];
+        //$this->installer = $this->app[InstallerInterface::class];
     }
 
     public static function getModuleNamespace(){
