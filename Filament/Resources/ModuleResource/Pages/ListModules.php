@@ -18,7 +18,7 @@ class ListModules extends ListRecords
                 ->button()
                 ->icon('heroicon-o-search')
                 ->action(function (){
-                    \Lam::scan();
+                    \Lam::scanModules();
                     redirect(request()->header("Referer"));
                 })
         ];
