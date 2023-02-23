@@ -75,7 +75,7 @@ class Lam extends FileRepository
     {
         try {
             \DB::beginTransaction();
-            $module = \Module::find($name);
+            $module = \Lam::find($name);
             \Artisan::call("module:migrate-refresh ".$module->getName());
             app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
             $module->enable();
@@ -90,7 +90,7 @@ class Lam extends FileRepository
     public static function uninstallModule($name){
         try {
             \DB::beginTransaction();
-            $module = \Module::find($name);
+            $module = \Lam::find($name);
             \Artisan::call("module:migrate-rollback ".$module->getName());
             app()->register(self::getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
             $module->disable();
