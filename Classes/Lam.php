@@ -5,16 +5,17 @@ namespace Modules\LAM\Classes;
 use Illuminate\Container\Container;
 use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Models\Module;
+use Nwidart\Modules\FileRepository;
 
-class Lam
+class Lam extends FileRepository
 {
-    private $app;
-    private $installer;
-    public function __construct(Container $app)
-    {
-        $this->app = $app;
-        //$this->installer = $this->app[InstallerInterface::class];
-    }
+//    private $app;
+//    private $installer;
+//    public function __construct(Container $app)
+//    {
+//        $this->app = $app;
+//        //$this->installer = $this->app[InstallerInterface::class];
+//    }
 
     public static function getModuleNamespace(){
         return config("modules.namespace","Modules");
@@ -70,22 +71,22 @@ class Lam
             !$module->isEnabled() &&
             self::isInstalled($module);
     }
-    public static function install($name)
-    {
-        try {
-            \DB::beginTransaction();
-            $module = \Module::find($name);
-            \Artisan::call("module:migrate-refresh ".$module->getName());
-            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
-            $module->enable();
-            self::setInstalled($module,true);
-            \DB::commit();
-        }catch (\Throwable $exception){
-            \DB::rollBack();
-        }
-
-
-    }
+//    public static function install($name)
+//    {
+//        try {
+//            \DB::beginTransaction();
+//            $module = \Module::find($name);
+//            \Artisan::call("module:migrate-refresh ".$module->getName());
+//            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
+//            $module->enable();
+//            self::setInstalled($module,true);
+//            \DB::commit();
+//        }catch (\Throwable $exception){
+//            \DB::rollBack();
+//        }
+//
+//
+//    }
     public static function uninstall($name){
         try {
             \DB::beginTransaction();
@@ -101,14 +102,19 @@ class Lam
 
     }
 
-    public static function scan(): void
+//    public static function scan(): void
+//    {
+//        Module::truncate();
+//        $modules = \Module::all();
+//        if(!empty($modules)){
+//            foreach ($modules as $module){
+//                Module::firstOrCreate(["name"=>$module->getLowerName()]);
+//            }
+//        }
+//    }
+
+    protected function createModule(...$args)
     {
-        Module::truncate();
-        $modules = \Module::all();
-        if(!empty($modules)){
-            foreach ($modules as $module){
-                Module::firstOrCreate(["name"=>$module->getLowerName()]);
-            }
-        }
+        return new \Nwidart\Modules\Laravel\Module(...$args);
     }
 }

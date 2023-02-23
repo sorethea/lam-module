@@ -49,7 +49,12 @@ class LAMServiceProvider extends ServiceProvider
         ]);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(FilamentServiceProvider::class);
-        $this->app->alias(LamRepositoryInterface::class,"lams");
+        $this->app->singleton(RepositoryInterface::class, function ($app) {
+            $path = $app['config']->get('modules.paths.modules');
+
+            return new Lam($app, $path);
+        });
+        $this->app->alias(RepositoryInterface::class,"lams");
     }
 
     /**
