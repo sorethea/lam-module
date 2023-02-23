@@ -28,7 +28,6 @@ class Lam extends FileRepository
     }
     public function setInstalled($module,bool $installed): void
     {
-        dd($module->getName());
         $module->json()->set("installed",$installed)->save();
 
     }
@@ -83,6 +82,7 @@ class Lam extends FileRepository
             app()->register($this->getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
             $module->enable();
             $this->setInstalled($module,true);
+            dd($this->isInstalled($module));
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
