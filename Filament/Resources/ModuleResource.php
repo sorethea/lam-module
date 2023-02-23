@@ -84,7 +84,7 @@ class ModuleResource extends Resource
                     ->color('danger')
                     ->visible(fn($record)=>\Lam::isVisibleForInstall($record->name))
                     ->action(function ($record){
-                        \Lam::install($record->name);
+                        \Lam::installModule($record->name);
                         redirect(request()->header("Referer"));
                     }),
                 Action::make("uninstallation")
@@ -95,7 +95,7 @@ class ModuleResource extends Resource
                     ->color('danger')
                     ->visible(fn($record)=>\Lam::isVisibleForUninstall($record->name))
                     ->action(function($record){
-                        \Lam::uninstall($record->name);
+                        \Lam::uninstallModule($record->name);
                         redirect(request()->header("Referer"));
                     })
                     ->requiresConfirmation(),
