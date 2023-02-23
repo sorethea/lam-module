@@ -76,6 +76,7 @@ class Lam extends FileRepository
         try {
             \DB::beginTransaction();
             $module = \Lam::find($name);
+            dd($module->getName());
             \Artisan::call("module:migrate-refresh ".$module->getName());
             app()->register($this->getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
             $module->enable();
