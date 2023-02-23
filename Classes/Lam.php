@@ -9,13 +9,6 @@ use Nwidart\Modules\FileRepository;
 
 class Lam extends FileRepository
 {
-//    private $app;
-//    private $installer;
-//    public function __construct(Container $app)
-//    {
-//        $this->app = $app;
-//        //$this->installer = $this->app[InstallerInterface::class];
-//    }
 
     public function getModuleNamespace(){
         return config("modules.namespace","Modules");
@@ -82,6 +75,7 @@ class Lam extends FileRepository
             app()->register($this->getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
             $module->enable();
             $this->setInstalled($module,true);
+            dd($module->getName());
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
