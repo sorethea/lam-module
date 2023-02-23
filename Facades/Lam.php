@@ -6,6 +6,6 @@ class Lam extends \Illuminate\Support\Facades\Facade
 {
     protected static function getFacadeAccessor()
     {
-        return "lam";//\Modules\LAM\Classes\Lam::class;
+        return "lams";//\Modules\LAM\Classes\Lam::class;
     }
 }
