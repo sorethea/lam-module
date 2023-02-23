@@ -42,7 +42,7 @@ class InstallCommand extends Command
     {
         if ($name = $this->argument('module') ) {
             $module = \Lam::find($name);
-            \Lam::installModule();
+            \Lam::installModule($name);
             $this->components->info("Module {$module->getName()} install completed");
             return 1;
         }

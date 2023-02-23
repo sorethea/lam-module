@@ -41,7 +41,7 @@ class UninstallCommand extends Command
     {
         if ($name = $this->argument('module') ) {
             $module = \Lam::find($name);
-            \Lam::uninstallModule();
+            \Lam::uninstallModule($name);
             $this->components->info("Module {$module->getName()} uninstall completed");
             return 1;
         }
