@@ -87,7 +87,7 @@ class Lam extends FileRepository
 
 
     }
-    public static function uninstallModule($name){
+    public function uninstallModule($name){
         try {
             \DB::beginTransaction();
             $module = \Lam::find($name);
@@ -102,7 +102,7 @@ class Lam extends FileRepository
 
     }
 
-    public static function scanModules(): void
+    public function scanModules(): void
     {
         Module::truncate();
         $modules = \Lam::all();
