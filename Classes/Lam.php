@@ -38,7 +38,7 @@ class Lam extends FileRepository
     }
     public function isVisibleForEnable($name) :bool
     {
-        $module = \Module::find($name);
+        $module = \Lam::find($name);
         return
             auth()->user()->can("modules.manager") &&
             !$module->isEnabled() &&
@@ -47,7 +47,7 @@ class Lam extends FileRepository
     }
     public function isVisibleForDisable($name) :bool
     {
-        $module = \Module::find($name);
+        $module = \Lam::find($name);
         return
             auth()->user()->can("modules.manager") &&
             $module->isEnabled() &&
@@ -56,7 +56,7 @@ class Lam extends FileRepository
     }
     public function isVisibleForInstall($name): bool
     {
-        $module = \Module::find($name);
+        $module = \Lam::find($name);
         return
             auth()->user()->can("modules.manager") &&
             !$this->isSystem($module) &&
@@ -64,7 +64,7 @@ class Lam extends FileRepository
     }
     public function isVisibleForUninstall($name): bool
     {
-        $module = \Module::find($name);
+        $module = \Lam::find($name);
         return
             auth()->user()->can("modules.manager") &&
             !$this->isSystem($module) &&
