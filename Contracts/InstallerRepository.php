@@ -7,7 +7,7 @@ use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Nwidart\Modules\Module;
 
-abstract class InstallerRepository implements InstallerInterface
+class InstallerRepository implements InstallerInterface
 {
     private CacheManager $cache;
 
