@@ -8,6 +8,7 @@ use Modules\LAM\Classes\Lam;
 use Modules\LAM\Commands\InstallCommand;
 use Modules\LAM\Commands\UninstallCommand;
 use Modules\LAM\Contracts\InstallerInterface;
+use Modules\LAM\Contracts\LamRepositoryInterface;
 use Nwidart\Modules\Contracts\RepositoryInterface;
 
 class LAMServiceProvider extends ServiceProvider
@@ -48,7 +49,7 @@ class LAMServiceProvider extends ServiceProvider
         ]);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(FilamentServiceProvider::class);
-        $this->app->alias(RepositoryInterface::class,"lams");
+        $this->app->alias(LamRepositoryInterface::class,"lams");
     }
 
     /**
