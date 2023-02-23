@@ -2,15 +2,15 @@
 
 namespace Modules\LAM\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\ServiceProvider;
 use Modules\LAM\Classes\Lam;
 use Modules\LAM\Commands\InstallCommand;
 use Modules\LAM\Commands\UninstallCommand;
 use Modules\LAM\Contracts\InstallerInterface;
-use Modules\LAM\Contracts\LamRepositoryInterface;
-use Modules\LAM\Installer\FileInstaller;
-use Nwidart\Modules\Contracts\RepositoryInterface;
+use Modules\LAM\Contracts\InstallerRepository;
+use Modules\LAM\Contracts\LamInterface;
+use Modules\LAM\Contracts\LamRepository;
 
 class LAMServiceProvider extends ServiceProvider
 {
@@ -49,17 +49,17 @@ class LAMServiceProvider extends ServiceProvider
             UninstallCommand::class,
         ]);
         $this->registerServices();
-        $this->app->bind(InstallerInterface::class, FileInstaller::class);
+        $this->app->bind(InstallerInterface::class, InstallerRepository::class);
     }
 
     protected function registerServices(){
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(FilamentServiceProvider::class);
-        $this->app->singleton(LamRepositoryInterface::class, function ($app) {
+        $this->app->singleton(LamInterface::class, function ($app) {
             $path = $app['config']->get('modules.paths.modules');
             return new Lam($app, $path);
         });
-        $this->app->alias(LamRepositoryInterface::class,"lams");
+        $this->app->alias(LamInterface::class,"lams");
     }
 
     /**

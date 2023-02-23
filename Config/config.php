@@ -11,7 +11,7 @@ return [
     'installer'=>[
         'file'=>[
             'path' => base_path('installed_modules.json'),
-            'class' => \Modules\LAM\Installer\FileInstaller::class,
+            'class' => \Modules\LAM\Contracts\FileInstaller::class,
             'cache-key' => 'installer-file',
             'cache-lifetime' => 604800,
         ]

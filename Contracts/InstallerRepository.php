@@ -1,14 +1,13 @@
 <?php
 
-namespace Modules\LAM\Installer;
+namespace Modules\LAM\Contracts;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
-use Modules\LAM\Contracts\InstallerInterface;
 use Nwidart\Modules\Module;
 
-class FileInstaller implements InstallerInterface
+abstract class InstallerRepository implements InstallerInterface
 {
     private CacheManager $cache;
 
