@@ -71,23 +71,23 @@ class Lam extends FileRepository
             !$module->isEnabled() &&
             self::isInstalled($module);
     }
-//    public static function install($name)
-//    {
-//        try {
-//            \DB::beginTransaction();
-//            $module = \Module::find($name);
-//            \Artisan::call("module:migrate-refresh ".$module->getName());
-//            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
-//            $module->enable();
-//            self::setInstalled($module,true);
-//            \DB::commit();
-//        }catch (\Throwable $exception){
-//            \DB::rollBack();
-//        }
-//
-//
-//    }
-    public static function uninstall($name){
+    public static function installModule($name)
+    {
+        try {
+            \DB::beginTransaction();
+            $module = \Module::find($name);
+            \Artisan::call("module:migrate-refresh ".$module->getName());
+            app()->register(self::getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
+            $module->enable();
+            self::setInstalled($module,true);
+            \DB::commit();
+        }catch (\Throwable $exception){
+            \DB::rollBack();
+        }
+
+
+    }
+    public static function uninstallModule($name){
         try {
             \DB::beginTransaction();
             $module = \Module::find($name);
@@ -102,16 +102,16 @@ class Lam extends FileRepository
 
     }
 
-//    public static function scan(): void
-//    {
-//        Module::truncate();
-//        $modules = \Module::all();
-//        if(!empty($modules)){
-//            foreach ($modules as $module){
-//                Module::firstOrCreate(["name"=>$module->getLowerName()]);
-//            }
-//        }
-//    }
+    public static function scanModules(): void
+    {
+        Module::truncate();
+        $modules = \Module::all();
+        if(!empty($modules)){
+            foreach ($modules as $module){
+                Module::firstOrCreate(["name"=>$module->getLowerName()]);
+            }
+        }
+    }
 
     protected function createModule(...$args)
     {
