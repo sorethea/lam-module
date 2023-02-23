@@ -34,7 +34,7 @@ class Lam extends FileRepository
     public function isInstalled($module):bool{
         return $module->json()->get("installed",false);
     }
-    public static function isSystem($module):bool{
+    public function isSystem($module):bool{
         return $module->json()->get("type","module")=="system";
     }
     public function isVisibleForEnable($name) :bool
@@ -82,7 +82,6 @@ class Lam extends FileRepository
             app()->register($this->getModuleProviderNamespace($module->getName())."\\InstallServiceProvider");
             $module->enable();
             $this->setInstalled($module,true);
-            dd($this->isInstalled($module));
             \DB::commit();
         }catch (\Throwable $exception){
             \DB::rollBack();
