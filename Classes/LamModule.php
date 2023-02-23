@@ -22,4 +22,7 @@ class LamModule extends \Nwidart\Modules\Laravel\Module
     public function installModule(){
         $this->installer->install($this);
     }
+    public function uninstallModule(){
+        $this->installer->uninstall($this);
+    }
 }

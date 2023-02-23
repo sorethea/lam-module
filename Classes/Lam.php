@@ -77,7 +77,6 @@ class Lam extends FileRepository
             $module->installModule();
             $this->setInstalled($module,true);
             \DB::commit();
-            return $module;
         }catch (\Throwable $exception){
             \DB::rollBack();
         }
@@ -91,6 +90,7 @@ class Lam extends FileRepository
             \Artisan::call("module:migrate-rollback ".$module->getName());
             app()->register($this->getModuleProviderNamespace($module->getName())."\\UninstallServiceProvider");
             $module->disable();
+            $module->uninstallModule();
             $this->setInstalled($module,false);
             \DB::commit();
         }catch (\Throwable $exception){
