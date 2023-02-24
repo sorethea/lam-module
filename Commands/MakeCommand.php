@@ -46,7 +46,7 @@ class MakeCommand extends Command
                 ->setComponent($this->components)
                 ->setForce($this->option('force'))
                 ->setType($this->getModuleType())
-                ->setActive(!$this->option('disabled'))
+                ->setActive($this->option('disabled'))
                 ->generate();
 
             if ($code === E_ERROR) {
