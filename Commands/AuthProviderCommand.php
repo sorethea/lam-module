@@ -37,7 +37,7 @@ class AuthProviderCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::REQUIRED, 'The name of module will be used.'],
         ];
     }
 

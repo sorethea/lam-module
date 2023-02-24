@@ -9,7 +9,7 @@ use Nwidart\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class ResourceProviderCommand extends GeneratorCommand
+class InstallProviderCommand extends GeneratorCommand
 {
     use ModuleCommandTrait;
 
@@ -20,14 +20,14 @@ class ResourceProviderCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'lam:resource-provider';
+    protected $name = 'lam:install-provider';
 
     /**
      * The command description.
      *
      * @var string
      */
-    protected $description = 'Create a new filament resource service provider for the specified module.';
+    protected $description = 'Create a new install service provider for the specified module.';
 
     /**
      * The command arguments.
@@ -57,11 +57,12 @@ class ResourceProviderCommand extends GeneratorCommand
     {
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
 
-        return (new Stub('/resource-provider.stub', [
+        return (new Stub('/install-provider.stub', [
             'NAMESPACE'            => $this->getClassNamespace($module),
             'CLASS'                => $this->getFileName(),
             'LOWER_NAME'           => $module->getLowerName(),
             'NAME'           => $module->getName(),
+            'SEEDER' => $this->getSeeder(),
         ]))->render();
     }
 
@@ -70,7 +71,14 @@ class ResourceProviderCommand extends GeneratorCommand
      */
     private function getFileName()
     {
-        return 'ResourceServiceProvider';
+        return 'InstallServiceProvider';
+    }
+
+    private function getSeeder()
+    {
+        $namespace = $this->laravel['modules']->config('namespace');
+        $generatorPath =GenerateConfigReader::read('seeder');
+        return $namespace. '\\'. $this->getModuleName() .'\\'. $generatorPath->getNamespace();
     }
 
     /**

@@ -1,0 +1,15 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use $SEEDER$\$NAME$DatabaseSeeder;
+use Modules\LAM\Providers\BaseUninstallServiceProvider;
+
+class $CLASS$ extends BaseUninstallServiceProvider
+{
+    public function uninstall()
+    {
+        $seed = new $NAME$DatabaseSeeder();
+        $seed->rollback();
+    }
+}

@@ -17,7 +17,7 @@ class MakeCommand extends Command
      *
      * @var string
      */
-    protected $name = 'lam:make {name?}';
+    protected $name = 'lam:make-module {name?}';
 
     /**
      * The console command description.

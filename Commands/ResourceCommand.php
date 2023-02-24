@@ -23,15 +23,7 @@ class ResourceCommand extends Command
 
     public function handle(): int
     {
-        $module = (string) Str::of($this->argument('module') ?? $this->askRequired('Module (e.g. `Utility`)', 'module'))
-            ->studly();
 
-        if (blank($module)) {
-            $module = 'Module';
-        }
-        $moduleNamespace = config('modules.namespace','Modules').'\\'.$module;
-        $namespace = $moduleNamespace.'\\Filament\\Resources';
-        $path = base_path($namespace);
 
         $model = (string) Str::of($this->argument('name') ?? $this->askRequired('Model (e.g. `BlogPost`)', 'name'))
             ->studly()
@@ -51,6 +43,16 @@ class ResourceCommand extends Command
             (string) Str::of($model)->beforeLast('\\') :
             '';
         $pluralModelClass = (string) Str::of($modelClass)->pluralStudly();
+
+        $module = (string) Str::of($this->argument('module') ?? $this->askRequired('Module (e.g. `Utility`)', 'module'))
+            ->studly();
+
+        if (blank($module)) {
+            $module = 'Module';
+        }
+        $moduleNamespace = config('modules.namespace','Modules').'\\'.$module;
+        $namespace = $moduleNamespace.'\\Filament\\Resources';
+        $path = base_path($namespace);
 
         $resource = "{$model}Resource";
         $resourceClass = "{$modelClass}Resource";

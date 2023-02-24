@@ -1,0 +1,15 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use $SEEDER$\$NAME$DatabaseSeeder;
+use Modules\LAM\Providers\BaseInstallServiceProvider;
+
+class $CLASS$ extends BaseInstallServiceProvider
+{
+    public function install()
+    {
+        $seed = new $NAME$DatabaseSeeder();
+        $seed->run();
+    }
+}

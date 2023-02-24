@@ -443,6 +443,12 @@ class ModuleGenerator extends Generator
             $this->console->call('lam:resource-provider', [
                 'module' => $this->getName(),
             ]);
+            $this->console->call('lam:install-provider', [
+                'module' => $this->getName(),
+            ]);
+            $this->console->call('lam:uninstall-provider', [
+                'module' => $this->getName(),
+            ]);
         }
 
         if (GenerateConfigReader::read('controller')->generate() === true) {

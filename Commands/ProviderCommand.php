@@ -51,7 +51,7 @@ class ProviderCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The service provider name.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::REQUIRED, 'The name of module will be used.'],
         ];
     }
 
