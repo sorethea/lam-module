@@ -9,6 +9,6 @@ class InstallServiceProvider extends BaseInstallServiceProvider
     public function install()
     {
         $seed = new LAMDatabaseSeeder();
-        $seed->run();
+        $seed?->run();
     }
 }
