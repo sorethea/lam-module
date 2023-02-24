@@ -1,0 +1,9 @@
+<?php
+
+return [
+    'name' => '$STUDLY_NAME$',
+    'navigation'=>[
+        'name' => '$STUDLY_NAME$',
+        'enabled' => true,
+    ],
+];
