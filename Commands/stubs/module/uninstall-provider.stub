@@ -10,6 +10,6 @@ class $CLASS$ extends BaseUninstallServiceProvider
     public function uninstall()
     {
         $seed = new $NAME$DatabaseSeeder();
-        $seed?->rollback();
+        if(!empty($seed->rollback()))$seed->rollback();
     }
 }

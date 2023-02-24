@@ -10,6 +10,6 @@ class $CLASS$ extends BaseInstallServiceProvider
     public function install()
     {
         $seed = new $NAME$DatabaseSeeder();
-        $seed?->run();
+        if($seed->run())$seed->run();
     }
 }

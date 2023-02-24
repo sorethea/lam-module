@@ -10,6 +10,6 @@ class UninstallServiceProvider extends BaseUninstallServiceProvider
     public function uninstall()
     {
         $seed = new LAMDatabaseSeeder();
-        $seed?->rollback();
+        $seed->rollback();
     }
 }
