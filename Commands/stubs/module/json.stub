@@ -1,5 +1,5 @@
 {
-    "name": "$STUDLY_NAME$",
+    "name": "$STUDLY_NAME$-module",
     "alias": "$LOWER_NAME$",
     "description": "",
     "keywords": [],
