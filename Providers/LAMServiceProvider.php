@@ -5,8 +5,6 @@ namespace Modules\LAM\Providers;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
 use Modules\LAM\Classes\Lam;
-use Modules\LAM\Commands\InstallCommand;
-use Modules\LAM\Commands\UninstallCommand;
 use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Contracts\InstallerRepository;
 use Modules\LAM\Contracts\LamInterface;
@@ -44,12 +42,9 @@ class LAMServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands([
-            InstallCommand::class,
-            UninstallCommand::class,
-        ]);
         $this->registerServices();
         $this->app->bind(InstallerInterface::class, InstallerRepository::class);
+        $this->app->register(CommandServiceProvider::class);
     }
 
     protected function registerServices(){
