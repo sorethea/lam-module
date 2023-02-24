@@ -1,10 +1,10 @@
 <?php
 
-namespace Sorethea\Lam\Commands;
+namespace Modules\LAM\Commands;
 
 use Nwidart\Modules\Commands\GeneratorCommand;
 use Nwidart\Modules\Support\Config\GenerateConfigReader;
-use Sorethea\Lam\Support\Stub;
+use Modules\LAM\Support\Stub;
 use Nwidart\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -57,7 +57,7 @@ class ResourceProviderCommand extends GeneratorCommand
     {
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
 
-        return (new Stub('/filament-provider.stub', [
+        return (new Stub('/resource-provider.stub', [
             'NAMESPACE'            => $this->getClassNamespace($module),
             'CLASS'                => $this->getFileName(),
             'LOWER_NAME'           => $module->getLowerName(),

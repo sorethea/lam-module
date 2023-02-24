@@ -7,8 +7,8 @@ use Modules\LAM\Commands\AuthProviderCommand;
 use Modules\LAM\Commands\InstallCommand;
 use Modules\LAM\Commands\MakeCommand;
 use Modules\LAM\Commands\ProviderCommand;
+use Modules\LAM\Commands\ResourceProviderCommand;
 use Modules\LAM\Commands\UninstallCommand;
-use Sorethea\Lam\Commands\ResourceCommand;
 
 class CommandServiceProvider extends ServiceProvider
 {
@@ -25,7 +25,7 @@ class CommandServiceProvider extends ServiceProvider
             MakeCommand::class,
             ProviderCommand::class,
             AuthProviderCommand::class,
-            ResourceCommand::class,
+            ResourceProviderCommand::class,
         ]);
     }
 

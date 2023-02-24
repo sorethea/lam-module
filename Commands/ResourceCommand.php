@@ -1,10 +1,10 @@
 <?php
 
-namespace Sorethea\Lam\Commands;
+namespace Modules\LAM\Commands;
 
 use Filament\Commands\MakeResourceCommand as Command;
 use Illuminate\Support\Str;
-use Sorethea\Lam\Support\Stub;
+use Modules\LAM\Support\Stub;
 
 
 class ResourceCommand extends Command
