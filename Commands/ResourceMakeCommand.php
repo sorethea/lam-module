@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Modules\LAM\Support\Stub;
 
 
-class ResourceCommand extends Command
+class ResourceMakeCommand extends Command
 {
     /**
      * The name and signature of the console command.

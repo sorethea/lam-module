@@ -7,6 +7,7 @@ use Modules\LAM\Commands\AuthProviderCommand;
 use Modules\LAM\Commands\InstallCommand;
 use Modules\LAM\Commands\MakeCommand;
 use Modules\LAM\Commands\ProviderCommand;
+use Modules\LAM\Commands\ResourceCommand;
 use Modules\LAM\Commands\ResourceProviderCommand;
 use Modules\LAM\Commands\UninstallCommand;
 
@@ -26,6 +27,7 @@ class CommandServiceProvider extends ServiceProvider
             ProviderCommand::class,
             AuthProviderCommand::class,
             ResourceProviderCommand::class,
+            ResourceCommand::class,
         ]);
     }
 
