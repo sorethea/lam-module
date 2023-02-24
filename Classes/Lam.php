@@ -24,32 +24,32 @@ class Lam extends FileRepository
     {
         $module = \Lam::find($name);
         return
-            !$module->isEnabled() &&
-            $module->isInstalled() &&
-            !$module->isSystem();
+            !$module?->isEnabled() &&
+            $module?->isInstalled() &&
+            !$module?->isSystem();
     }
     public function isVisibleForDisable($name) :bool
     {
         $module = \Lam::find($name);
         return
-            $module->isEnabled() &&
-            $module->isInstalled() &&
-            !$module->isSystem();
+            $module?->isEnabled() &&
+            $module?->isInstalled() &&
+            !$module?->isSystem();
     }
     public function isVisibleForInstall($name): bool
     {
         $module = \Lam::find($name);
         return
-            !$module->isInstalled() &&
-            !$module->isSystem();
+            !$module?->isInstalled() &&
+            !$module?->isSystem();
     }
     public function isVisibleForUninstall($name): bool
     {
         $module = \Lam::find($name);
         return
-            $module->isInstalled() &&
-            !$module->isEnabled() &&
-            !$module->isSystem();
+            $module?->isInstalled() &&
+            !$module?->isEnabled() &&
+            !$module?->isSystem();
     }
     public function installModule($name)
     {
