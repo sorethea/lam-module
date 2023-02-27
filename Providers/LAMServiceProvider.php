@@ -48,6 +48,7 @@ class LAMServiceProvider extends ServiceProvider
     }
 
     protected function registerServices(){
+        $this->app->register(AuthServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(FilamentServiceProvider::class);
         $this->app->singleton(LamInterface::class, function ($app) {
