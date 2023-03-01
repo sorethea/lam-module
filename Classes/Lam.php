@@ -80,6 +80,7 @@ class Lam extends FileRepository
             $this->scanModules();
             \DB::commit();
         }catch (\Throwable $exception){
+            info($exception->getMessage());
             \DB::rollBack();
         }
 
