@@ -16,41 +16,50 @@ return [
             'cache-lifetime' => 604800,
         ]
     ],
-
     'system-navigation'=>[
        'name'=>'System',
         'enabled'=>true,
     ],
     'models'=>[
         'Module'=>[
-            'icon'=>'heroicon-o-cube'
+            'icon'=>'heroicon-o-cube',
+            'name'=>'modules',
         ],
         'Comment'=>[
-            'icon'=>'heroicon-o-chat'
+            'icon'=>'heroicon-o-chat',
+            'name'=>'comments',
         ],
         'Coupon'=>[
-            'icon'=>'heroicon-o-gift'
+            'icon'=>'heroicon-o-gift',
+            'name'=>'coupons',
         ],
         'Extra'=>[
-            'icon'=>'heroicon-o-view-grid-add'
+            'icon'=>'heroicon-o-view-grid-add',
+            'name'=>'extras',
         ],
         'Phone'=>[
-            'icon'=>'heroicon-o-phone'
+            'icon'=>'heroicon-o-phone',
+            'name'=>'phones'
         ],
         'Address'=>[
-            'icon'=>'heroicon-o-at-symbol'
+            'icon'=>'heroicon-o-at-symbol',
+            'name'=>'addresses',
         ],
         'Rating'=>[
-            'icon'=>'heroicon-o-star'
+            'icon'=>'heroicon-o-star',
+            'name'=>'ratings',
         ],
         'Price'=>[
-            'icon'=>'heroicon-o-currency-dollar'
+            'icon'=>'heroicon-o-currency-dollar',
+            'name'=>'prices',
         ],
         'Import'=>[
-            'icon'=>'heroicon-o-upload'
+            'icon'=>'heroicon-o-upload',
+            'name'=>'imports',
         ],
         'Tag'=>[
-            'icon'=>'heroicon-o-tag'
+            'icon'=>'heroicon-o-tag',
+            'name'=>'tags',
         ],
     ],
     'navigation'=>[
