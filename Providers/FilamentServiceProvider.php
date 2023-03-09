@@ -8,6 +8,7 @@ use Filament\PluginServiceProvider;
 use Modules\LAM\Filament\Resources\ActivityResource;
 use Modules\LAM\Filament\Resources\AddressResource;
 use Modules\LAM\Filament\Resources\CommentResource;
+use Modules\LAM\Filament\Resources\ImportResource;
 use Modules\Lam\Filament\Resources\ModuleResource;
 use Modules\LAM\Filament\Resources\PermissionResource;
 use Modules\LAM\Filament\Resources\PhoneResource;
@@ -37,6 +38,7 @@ class FilamentServiceProvider extends PluginServiceProvider
         PriceResource::class,
         RatingResource::class,
         TagResource::class,
+        ImportResource::class,
     ];
     public function configurePackage(Package $package): void
     {

@@ -46,6 +46,9 @@ return [
         'Price'=>[
             'icon'=>'heroicon-o-currency-dollar'
         ],
+        'Import'=>[
+            'icon'=>'heroicon-o-upload'
+        ],
         'Tag'=>[
             'icon'=>'heroicon-o-tag'
         ],
