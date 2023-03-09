@@ -84,7 +84,15 @@ class PolicyCommand extends GeneratorCommand
 
     public function getClass()
     {
-        return "{$this->getModel()}Policy";
+        $model = Str::of($this->argument("name"))
+            ->studly()
+            ->beforeLast('Policy')
+            ->trim('/')
+            ->trim('\\')
+            ->trim(' ')
+            ->studly()
+            ->replace('/', '\\');
+        return "{$model}Policy";
     }
 
     /**
@@ -92,7 +100,15 @@ class PolicyCommand extends GeneratorCommand
      */
     private function getFileName(): string
     {
-        return Str::studly($this->argument('name'));
+        $model = Str::of($this->argument("name"))
+            ->studly()
+            ->beforeLast('Policy')
+            ->trim('/')
+            ->trim('\\')
+            ->trim(' ')
+            ->studly()
+            ->replace('/', '\\');
+        return "{$model}Policy";
     }
 
     private function getModel(): string
