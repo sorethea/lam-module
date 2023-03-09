@@ -69,6 +69,18 @@ class PolicyCommand extends GeneratorCommand
         ]))->render();
     }
 
+    public function getClass()
+    {
+        return Str::of($this->argument("name"))
+            ->studly()
+            ->beforeLast('Policy')
+            ->trim('/')
+            ->trim('\\')
+            ->trim(' ')
+            ->studly()
+            ->replace('/', '\\');
+    }
+
     /**
      * @return mixed
      */
