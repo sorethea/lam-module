@@ -7,7 +7,7 @@ use Modules\LAM\Models\User;
 
 class ActivityPolicy extends BasedPolicy
 {
-    private string $model = "activities";
+     protected string $model = "activities";
 //    use HandlesAuthorization;
 //
 //    public function before(User $user): bool{
