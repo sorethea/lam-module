@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\LAM\Policies\ActivityPolicy;
+namespace Modules\LAM\Policies\Activity;
 use Modules\LAM\Policies\BasedPolicy;
-class activitiesPolicy extends BasedPolicy
+class ActivityPolicy extends BasedPolicy
 {
     protected string $model = "activities";
 }

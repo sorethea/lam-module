@@ -96,7 +96,7 @@ abstract class GeneratorCommand extends Command
 
         $namespace .= '\\' . $this->getDefaultNamespace();
 
-        $namespace .= '\\' . $extra;
+        //$namespace .= '\\' . $extra;
 
         $namespace = str_replace('/', '\\', $namespace);
 
