@@ -98,7 +98,9 @@ class PolicyCommand extends GeneratorCommand
             ->trim('\\')
             ->trim(' ')
             ->studly()
-            ->replace('/', '\\');
+            ->replace('/', '\\')
+            ->pluralStudly()
+            ->lower();
     }
 
     protected function getOptions()
