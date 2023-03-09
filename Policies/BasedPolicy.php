@@ -8,11 +8,10 @@ use Modules\LAM\Models\User;
 class BasedPolicy
 {
     use HandlesAuthorization;
-    protected string $module;
-    protected string $model;
+    private string $model;
 
     public function config($level): string{
-        return config($this->module.'.models.'.$this->model.".name").".".$level;
+        return "{$this->model}.{$level}";
     }
     public function before(User $user): bool{
         return $user->can($this->config("manager"));

@@ -21,6 +21,22 @@ return [
         'enabled'=>true,
     ],
     'models'=>[
+        'Activity'=>[
+            'icon'=>'heroicon-o-cube',
+            'name'=>'activities',
+        ],
+        'User'=>[
+            'icon'=>'heroicon-o-cube',
+            'name'=>'users',
+        ],
+        'Permission'=>[
+            'icon'=>'heroicon-o-cube',
+            'name'=>'permissions',
+        ],
+        'Role'=>[
+            'icon'=>'heroicon-o-cube',
+            'name'=>'roles',
+        ],
         'Module'=>[
             'icon'=>'heroicon-o-cube',
             'name'=>'modules',
