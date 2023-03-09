@@ -69,18 +69,6 @@ class PolicyCommand extends GeneratorCommand
         ]))->render();
     }
 
-    public function getClass()
-    {
-        return Str::of($this->argument("name"))
-            ->studly()
-            ->beforeLast('Policy')
-            ->trim('/')
-            ->trim('\\')
-            ->trim(' ')
-            ->studly()
-            ->replace('/', '\\');
-    }
-
     /**
      * @return mixed
      */
@@ -93,19 +81,18 @@ class PolicyCommand extends GeneratorCommand
         return $path . $policyPath->getPath() . '/' . $this->getFileName() . '.php';
     }
 
+
+    public function getClass()
+    {
+        return "{$this->getModel()}Policy";
+    }
+
     /**
      * @return string
      */
     private function getFileName(): string
     {
-        return Str::of($this->argument("name"))
-            ->studly()
-            ->beforeLast('Policy')
-            ->trim('/')
-            ->trim('\\')
-            ->trim(' ')
-            ->studly()
-            ->replace('/', '\\');
+        return Str::studly($this->argument('name'));
     }
 
     private function getModel(): string
