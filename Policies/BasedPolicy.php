@@ -8,7 +8,7 @@ use Modules\LAM\Models\User;
 class BasedPolicy
 {
     use HandlesAuthorization;
-    private string $model = '';
+    private ? string $model;
 
     public function config($level): string{
         return "{$this->model}.{$level}";
