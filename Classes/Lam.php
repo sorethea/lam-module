@@ -10,7 +10,7 @@ use Nwidart\Modules\FileRepository;
 
 class Lam extends FileRepository
 {
-    public function getWidget(): array
+    public function getWidgets(): array
     {
         return Filament::getWidgets();
     }
