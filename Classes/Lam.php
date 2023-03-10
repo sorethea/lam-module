@@ -2,6 +2,7 @@
 
 namespace Modules\LAM\Classes;
 
+use Filament\Facades\Filament;
 use Illuminate\Container\Container;
 use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Models\Module;
@@ -9,6 +10,10 @@ use Nwidart\Modules\FileRepository;
 
 class Lam extends FileRepository
 {
+    public function getWidget(): array
+    {
+        return Filament::getWidgets();
+    }
 
     public function getModuleNamespace(){
         return config("modules.namespace","Modules");
