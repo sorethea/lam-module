@@ -10,9 +10,17 @@ use Nwidart\Modules\FileRepository;
 
 class Lam extends FileRepository
 {
+    protected array $widgets = [];
     public function getWidgets(): array
     {
-        return Filament::getWidgets();
+        return collect($this->widgets)
+            ->unique()
+            ->sortBy(fn (string $widget): int => $widget::getSort())
+            ->all();
+    }
+
+    public function registerWidgets(array $widgets): void{
+        $this->widgets = array_merge($this->widgets, $widgets);
     }
 
     public function getModuleNamespace(){
