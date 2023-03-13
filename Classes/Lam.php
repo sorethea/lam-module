@@ -23,6 +23,14 @@ class Lam extends FileRepository
         $this->widgets = array_merge($this->widgets, $widgets);
     }
 
+    public function getUserAvatarUrl(Model $user){
+        if($user->getFirstMediaUrl("avatar")){
+            return $user->getFirstMediaUrl("avatar");
+        }else{
+            return \Filament\Facades\Filament::getUserAvatarUrl($user);
+        }
+    }
+
     public function getModuleNamespace(){
         return config("modules.namespace","Modules");
     }
