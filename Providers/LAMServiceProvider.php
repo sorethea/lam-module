@@ -2,6 +2,7 @@
 
 namespace Modules\LAM\Providers;
 
+use Filament\Widgets\AccountWidget;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
 use Modules\LAM\Classes\Lam;
@@ -34,7 +35,7 @@ class LAMServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
         \Lam::registerWidgets([
-            Widgets\AccountWidget::class,
+            AccountWidget::class,
         ]);
     }
 
