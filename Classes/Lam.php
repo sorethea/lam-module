@@ -5,6 +5,7 @@ namespace Modules\LAM\Classes;
 use Filament\Facades\Filament;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
+use Modules\HR\Models\Employee;
 use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Models\Module;
 use Nwidart\Modules\FileRepository;
@@ -25,7 +26,8 @@ class Lam extends FileRepository
     }
 
     public function getUserAvatarUrl(Model $user){
-            return $user?->employee?->getFirstMediaUrl("avatar")?? \Filament\Facades\Filament::getUserAvatarUrl($user);
+        $employee = Employee::where("user_id",$user->id)->first();
+        return $employee?->getFirstMediaUrl("avatar")?? \Filament\Facades\Filament::getUserAvatarUrl($user);
     }
 
     public function getModuleNamespace(){
