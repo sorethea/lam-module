@@ -33,6 +33,9 @@ class LAMServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        \Lam::registerWidgets([
+            Widgets\AccountWidget::class,
+        ]);
     }
 
     /**
