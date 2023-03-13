@@ -26,8 +26,12 @@ class Lam extends FileRepository
     }
 
     public function getUserAvatarUrl(Model $user){
-        $employee = Employee::where("user_id",$user->id)->first();
+        $employee = $this->getEmployee($user);
         return $employee?->getFirstMediaUrl("avatar")?? \Filament\Facades\Filament::getUserAvatarUrl($user);
+    }
+
+    public function getEmployee(Model $user){
+        return Employee::where("user_id",$user->id)->first();
     }
 
     public function getModuleNamespace(){
