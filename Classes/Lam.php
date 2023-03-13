@@ -25,11 +25,7 @@ class Lam extends FileRepository
     }
 
     public function getUserAvatarUrl(Model $user){
-        if($user->getFirstMediaUrl("avatar")){
-            return $user->getFirstMediaUrl("avatar");
-        }else{
-            return \Filament\Facades\Filament::getUserAvatarUrl($user);
-        }
+            return $user?->employee?->getFirstMediaUrl("avatar")?? \Filament\Facades\Filament::getUserAvatarUrl($user);
     }
 
     public function getModuleNamespace(){
