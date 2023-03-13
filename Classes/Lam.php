@@ -36,7 +36,7 @@ class Lam extends FileRepository
 
     public function getEmployeeName(Model $user){
         $employee = $this->getEmployee($user);
-        return $employee->fist_name . " " . $employee->last_name;
+        return $employee ? $employee->fist_name . " " . $employee->last_name: $user->name;
     }
 
     public function getModuleNamespace(){
