@@ -34,6 +34,11 @@ class Lam extends FileRepository
         return Employee::where("user_id",$user->id)->first();
     }
 
+    public function getEmployeeName(Model $user){
+        $employee = $this->getEmployee($user);
+        return $employee->fist_name . " " . $employee->last_name;
+    }
+
     public function getModuleNamespace(){
         return config("modules.namespace","Modules");
     }
