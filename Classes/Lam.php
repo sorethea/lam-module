@@ -4,6 +4,7 @@ namespace Modules\LAM\Classes;
 
 use Filament\Facades\Filament;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Model;
 use Modules\LAM\Contracts\InstallerInterface;
 use Modules\LAM\Models\Module;
 use Nwidart\Modules\FileRepository;
