@@ -23,7 +23,12 @@ class FilamentServiceProvider extends PluginServiceProvider
 {
     public function isEnabled(): bool{
         $module = \Module::find('lam');
-        return $module->isEnabled();
+        if(!empty($module)){
+            return $module?->isEnabled();
+        }else{
+            return false;
+        }
+
     }
     protected array $pages = [];
     protected array $resources =[
