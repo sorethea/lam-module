@@ -39,6 +39,13 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
     ];
 
+
+    protected $appends=[
+        'phone',
+        'address',
+        ];
+
+
     /**
      * The attributes that should be cast.
      *
