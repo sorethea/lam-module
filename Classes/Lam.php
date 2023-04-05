@@ -117,7 +117,7 @@ class Lam extends FileRepository
 
     public function scanModules(): void
     {
-        Module::truncate();
+        Module::query()->delete();
         $modules = \Lam::all();
         if(!empty($modules)){
             foreach ($modules as $module){
